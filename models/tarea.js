@@ -1,7 +1,6 @@
 const {v4:uuidv4}= require('uuid');
 
 class Tarea{
-
     id='';
     descripcion='';
     completadoEn=null;
@@ -11,6 +10,5 @@ class Tarea{
         this.descripcion=desc;
     }
 }
-
 
 module.exports=Tarea;

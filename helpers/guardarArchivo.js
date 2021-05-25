@@ -14,8 +14,14 @@ const leerInformacion=()=>{
     }
 
     const info=fs.readFileSync(archivo,{encoding:'utf-8'});
-    const dataobject=JSON.parse(info);
-    return dataobject;
+    //console.log({info});
+    if(info!==''){
+        const dataobject=JSON.parse(info);
+        return dataobject;
+    }else{
+        return [];
+    }
+   
 };
 
 module.exports={
