@@ -51,7 +51,7 @@ const main = async () => {
             case '5':
               
             const ids= await mostrarlistadocheck(tareas.listadoArreglo);
-            //console.log(ids);
+            console.log(ids);
 
             tareas.cambiarpendientescompletadas(ids);
 
