@@ -105,8 +105,97 @@ const leerEntrada=async(message)=>{
 };
 
 
+const listadotareasborrar=async(tareas=[])=>{
+   
+       // map retorna un nuevo arreglo
+    const choices=tareas.map((tarea,i)=>{
+
+            const index=`${i+1}.`.blue;
+        return {
+            value:tarea.id,
+            name:`${index} ${tarea.descripcion}`  
+
+        }
+
+    });
+
+    choices.unshift({
+
+        value:'0',
+        name:`${0}.`.blue+ ' Salir',
+       
+    });
+
+    const preguntas=[
+            {
+                type:'list',
+                name:'id',
+                message:'borrar',
+                choices
+            }
+
+    ]
+    const {id}= await inquirer.prompt(preguntas);
+
+    
+        return id;
+};
+
+
+const confirmar=async(message)=>{
+
+    const pregunta=[
+        {
+            type:'confirm',
+            name:'ok',
+            message
+        }
+
+    ];
+    const {ok}= await inquirer.prompt(pregunta);
+
+    return ok;
+};
+
+
+const mostrarlistadocheck=async(tareas=[])=>{
+   
+    // map retorna un nuevo arreglo
+ const choices=tareas.map((tarea,i)=>{
+
+         const index=`${i+1}.`.blue;
+     return {
+         value:tarea.id,
+         name:`${index} ${tarea.descripcion}`  ,
+         checked:(tarea.completadoEn)?true:false
+
+     }
+
+ });
+
+
+
+ const preguntas=[
+         {
+             type:'checkbox',
+             name:'ids',
+             message:'seleccione',
+             choices
+         }
+
+ ]
+ const {ids}= await inquirer.prompt(preguntas);
+
+ 
+     return ids;
+};
+
+
 module.exports={
     menu,
     pausa,
-    leerEntrada
+    leerEntrada,
+    listadotareasborrar,
+    confirmar,
+    mostrarlistadocheck
 };

@@ -8,7 +8,10 @@ const {
 const {
   menu,
   pausa,
-  leerEntrada
+  leerEntrada,
+  listadotareasborrar,
+  confirmar,
+  mostrarlistadocheck
 } = require('./helpers/inquirer');
 //const Tarea = require('./models/tarea');
 const Tareas = require('./models/tareas');
@@ -29,6 +32,7 @@ const main = async () => {
   //await pausa();
   do {
     opt = await menu();
+    
     switch (opt) {
       case '1':
         const descripcion = await leerEntrada('Nueva tarea:'.green);
@@ -42,6 +46,30 @@ const main = async () => {
           break;
           case '4':
             console.log(tareas.listadoPendientesCompletadas(false));
+            break;
+
+            case '5':
+              
+            const ids= await mostrarlistadocheck(tareas.listadoArreglo);
+            //console.log(ids);
+
+            tareas.cambiarpendientescompletadas(ids);
+
+            
+              break;
+            case '6':
+            const id=await listadotareasborrar(tareas.listadoArreglo);
+
+            if(id!=='0'){
+              const confirmaropcion= await confirmar('Está seguro de borrar');
+          
+              if(confirmaropcion){
+  
+                tareas.borrartarea(id);
+                console.log('Tarea borrada');
+              }
+            }
+           
             break;
 
     }
